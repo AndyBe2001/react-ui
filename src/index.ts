@@ -1,5 +1,5 @@
 "use client";
 
-export * from "./components/display";
-export * from "./components/entry";
-export * from "./components/navigation";
+export * from "./display";
+export * from "./entry";
+export * from "./navigation";

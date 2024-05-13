@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "jsx": "react-jsx",
-    "rootDir": ".",
+    "rootDir": "src",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -14,7 +14,7 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "outDir": "dist"
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "**/*.stories.tsx"]
 }

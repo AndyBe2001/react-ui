@@ -1,5 +1,6 @@
 .*
-*.stories.tsx
+
+src/*
 
 node_modules
 storybook-static
@@ -7,3 +8,4 @@ dist
 
 postcss.config.js
 tailwind.config.js
+tsconfig.json
