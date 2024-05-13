@@ -9,9 +9,9 @@
     "type": "git",
     "url": "git+https://github.com/AndyBe2001/react-ui.git"
   },
-  "main": "src/index.ts",
-  "typing": "src/index.d.ts",
-  "types": "src/index.d.ts",
+  "main": "dist/index.ts",
+  "typing": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
