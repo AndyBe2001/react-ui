@@ -1,5 +1,4 @@
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
@@ -64,7 +63,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || loading}
         {...props}>
-        {loading ? <FontAwesomeIcon icon={faSpinner} spin /> : children}
+        {loading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
+        {children}
       </Comp>
     );
   }

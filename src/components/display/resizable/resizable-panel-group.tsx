@@ -4,7 +4,7 @@ import { PanelGroup } from "react-resizable-panels";
 
 import { cn } from "../../../utils";
 
-const ResizableGroup = ({
+const ResizablePanelGroup = ({
   className,
   ...props
 }: React.ComponentProps<typeof PanelGroup>) => (
@@ -17,4 +17,4 @@ const ResizableGroup = ({
   />
 );
 
-export { ResizableGroup };
+export { ResizablePanelGroup };
