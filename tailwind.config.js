@@ -1,10 +1,10 @@
-const { join } = require("path");
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    join(__dirname, "{src,pages,components,app}/**/*.{js,ts,jsx,tsx,mdx,html}"),
+    "./src/**/*.{js,ts,jsx,tsx,mdx,html}",
+    "./dist/**/*.{js,ts,jsx,tsx,mdx,html}",
   ],
   theme: {
     extend: {
