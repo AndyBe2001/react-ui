@@ -1,6 +1,6 @@
 "use client";
 
-import "../style.scss";
+import "./style.css";
 
 export * from "./display";
 export * from "./entry";
