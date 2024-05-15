@@ -1,4 +1,4 @@
-import "./style.scss";
+import "../src/style.scss";
 
 import { withThemeByClassName } from "@storybook/addon-themes";
 
