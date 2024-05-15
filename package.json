@@ -1,6 +1,6 @@
 {
   "name": "@andy-tsai/react-ui",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Next/React component based on shadcnUI",
   "author": "Andy Tsai",
   "license": "ISC",
@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/AndyBe2001/react-ui.git"
   },
+  "entry": "dist",
   "main": "dist/index.js",
   "typing": "dist/index.d.ts",
   "types": "dist/index.d.ts",
