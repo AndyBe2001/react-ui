@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import * as dayjs from "dayjs";
 import * as LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { useEffect, useState } from "react";
@@ -16,12 +16,14 @@ dayjs.extend(LocalizedFormat);
 export { DateRange } from "react-day-picker";
 export interface DateRangePickerProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+  clearable?: boolean;
   date?: DateRange;
   placeholder?: string;
   onChange: (date: DateRange) => void;
 }
 
 export function DateRangePicker({
+  clearable = false,
   className,
   date,
   placeholder = "Pick a date",
@@ -33,6 +35,10 @@ export function DateRangePicker({
     to: date?.to,
   });
 
+  useEffect(() => {
+    onChange(pickerDate);
+  }, [pickerDate]);
+
   return (
     <div className={cn("grid gap-2", className)} {...props}>
       <Popover>
@@ -41,8 +47,8 @@ export function DateRangePicker({
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[300px] justify-start text-left font-normal",
-              !pickerDate && "text-muted-foreground"
+              "group w-[300px] justify-start text-left font-normal",
+              !pickerDate.from && "text-muted-foreground"
             )}>
             <CalendarIcon className="mr-2 h-4 w-4" />
             {pickerDate?.from ? (
@@ -56,6 +62,14 @@ export function DateRangePicker({
               )
             ) : (
               <span>{placeholder}</span>
+            )}
+            {clearable && pickerDate.to && (
+              <CrossCircledIcon
+                className="hidden ml-auto group-hover:block hover:text-primary-500"
+                onClick={() =>
+                  setPickerDate({ from: undefined, to: undefined })
+                }
+              />
             )}
           </Button>
         </PopoverTrigger>

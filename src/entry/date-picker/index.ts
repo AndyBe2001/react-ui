@@ -1,1 +1,1 @@
-export * from "./date-picker.tsx";
+export * from "./date-picker";

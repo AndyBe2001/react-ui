@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import * as dayjs from "dayjs";
 import * as LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { useEffect, useState } from "react";
@@ -13,12 +13,14 @@ import { Calendar } from "../calendar";
 dayjs.extend(LocalizedFormat);
 
 export interface DatePickerProps {
+  clearable?: boolean;
   placeholder?: string;
   date?: Date;
   onChange: (date: Date) => void;
 }
 
 export function DatePicker({
+  clearable = false,
   date,
   onChange,
   placeholder = "Pick a date",
@@ -35,7 +37,7 @@ export function DatePicker({
         <Button
           variant={"outline"}
           className={cn(
-            "w-[240px] justify-start text-left font-normal",
+            "group w-[240px] justify-start text-left font-normal",
             !pickerDate && "text-muted-foreground"
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
@@ -43,6 +45,12 @@ export function DatePicker({
             dayjs(pickerDate).format("LL")
           ) : (
             <span>{placeholder}</span>
+          )}
+          {clearable && pickerDate && (
+            <CrossCircledIcon
+              className="hidden ml-auto group-hover:block hover:text-primary-500"
+              onClick={() => setPickerDate(undefined)}
+            />
           )}
         </Button>
       </PopoverTrigger>
