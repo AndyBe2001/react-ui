@@ -1,0 +1,59 @@
+"use client";
+
+import { CalendarIcon } from "@radix-ui/react-icons";
+import * as dayjs from "dayjs";
+import * as LocalizedFormat from "dayjs/plugin/localizedFormat";
+import { useEffect, useState } from "react";
+
+import { Popover, PopoverContent, PopoverTrigger } from "../../display/popover";
+import { cn } from "../../utils";
+import { Button } from "../button";
+import { Calendar } from "../calendar";
+
+dayjs.extend(LocalizedFormat);
+
+export interface DatePickerProps {
+  placeholder?: string;
+  date?: Date;
+  onChange: (date: Date) => void;
+}
+
+export function DatePicker({
+  date,
+  onChange,
+  placeholder = "Pick a date",
+}: DatePickerProps) {
+  const [pickerDate, setPickerDate] = useState<Date>(date);
+
+  useEffect(() => {
+    onChange(pickerDate);
+  }, [pickerDate]);
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !pickerDate && "text-muted-foreground"
+          )}>
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {pickerDate ? (
+            dayjs(pickerDate).format("LL")
+          ) : (
+            <span>{placeholder}</span>
+          )}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={pickerDate}
+          onSelect={setPickerDate}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  );
+}
