@@ -14,13 +14,15 @@ import { cn } from "../../utils";
 dayjs.extend(LocalizedFormat);
 
 export interface DatetimePickerProps {
+  className?: string;
   clearable?: boolean;
   placeholder?: string;
   date?: Date;
-  onChange: (date: Date) => void;
+  onChange?: (date: Date) => void;
 }
 
 export function DatetimePicker({
+  className,
   clearable = false,
   date,
   onChange,
@@ -29,7 +31,7 @@ export function DatetimePicker({
   const [pickerDatetime, setPickerDatetime] = useState<Date>(date);
 
   useEffect(() => {
-    onChange(pickerDatetime);
+    onChange && onChange(pickerDatetime);
   }, [pickerDatetime]);
 
   const handleCalendarSelect = (date: Date) => {
@@ -49,8 +51,9 @@ export function DatetimePicker({
         <Button
           variant={"outline"}
           className={cn(
-            "group w-[240px] justify-start text-left font-normal",
-            !pickerDatetime && "text-muted-foreground"
+            "group w-full justify-start text-left font-normal",
+            !pickerDatetime && "text-muted-foreground",
+            className
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
           {pickerDatetime ? (

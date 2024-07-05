@@ -19,7 +19,7 @@ export interface DateRangePickerProps
   clearable?: boolean;
   date?: DateRange;
   placeholder?: string;
-  onChange: (date: DateRange) => void;
+  onChange?: (date: DateRange) => void;
 }
 
 export function DateRangePicker({
@@ -36,7 +36,7 @@ export function DateRangePicker({
   });
 
   useEffect(() => {
-    onChange(pickerDate);
+    onChange && onChange(pickerDate);
   }, [pickerDate]);
 
   return (
@@ -47,7 +47,7 @@ export function DateRangePicker({
             id="date"
             variant={"outline"}
             className={cn(
-              "group w-[300px] justify-start text-left font-normal",
+              "group w-full justify-start text-left font-normal",
               !pickerDate.from && "text-muted-foreground"
             )}>
             <CalendarIcon className="mr-2 h-4 w-4" />

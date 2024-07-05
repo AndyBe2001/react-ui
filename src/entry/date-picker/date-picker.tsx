@@ -13,13 +13,15 @@ import { Calendar } from "../calendar";
 dayjs.extend(LocalizedFormat);
 
 export interface DatePickerProps {
+  className?: string;
   clearable?: boolean;
   placeholder?: string;
   date?: Date;
-  onChange: (date: Date) => void;
+  onChange?: (date: Date) => void;
 }
 
 export function DatePicker({
+  className,
   clearable = false,
   date,
   onChange,
@@ -28,7 +30,7 @@ export function DatePicker({
   const [pickerDate, setPickerDate] = useState<Date>(date);
 
   useEffect(() => {
-    onChange(pickerDate);
+    onChange && onChange(pickerDate);
   }, [pickerDate]);
 
   return (
@@ -37,8 +39,9 @@ export function DatePicker({
         <Button
           variant={"outline"}
           className={cn(
-            "group w-[240px] justify-start text-left font-normal",
-            !pickerDate && "text-muted-foreground"
+            "group w-full justify-start text-left font-normal",
+            !pickerDate && "text-muted-foreground",
+            className
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
           {pickerDate ? (
