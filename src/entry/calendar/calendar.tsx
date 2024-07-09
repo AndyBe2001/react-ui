@@ -1,11 +1,14 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import * as dayjs from "dayjs";
 import * as React from "react";
 import { DayPicker } from "react-day-picker";
 
 import { cn } from "../../utils";
 import { buttonVariants } from "../button";
+import { CalendarMonth } from "./calendar-month";
+import { CalendarYear } from "./calendar-year";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -15,6 +18,11 @@ export const Calendar = ({
   showOutsideDays = true,
   ...props
 }: CalendarProps) => {
+  const [month, setMonth] = React.useState<Date>(new Date());
+  const handleMonthChange = (date: Date) => {
+    props.onMonthChange && props.onMonthChange(date);
+    setMonth(date);
+  };
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -31,7 +39,7 @@ export const Calendar = ({
         ),
         nav_button_previous: "absolute left-1",
         nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-y-1",
+        table: "w-fit border-collapse space-y-1 mx-auto",
         head_row: "flex",
         head_cell:
           "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
@@ -62,7 +70,30 @@ export const Calendar = ({
       components={{
         IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
+        CaptionLabel: ({ displayMonth, displayIndex }) => (
+          <span className="flex gap-1 mx-9">
+            <CalendarYear
+              fromYear={props.fromYear}
+              toYear={props.toYear}
+              month={displayMonth}
+              onMonthChange={(month: Date) =>
+                handleMonthChange(
+                  dayjs(month).subtract(displayIndex, "month").toDate()
+                )
+              }
+            />
+            <CalendarMonth
+              month={displayMonth}
+              onMonthChange={(month: Date) =>
+                handleMonthChange(
+                  dayjs(month).subtract(displayIndex, "month").toDate()
+                )
+              }
+            />
+          </span>
+        ),
       }}
+      month={month}
       {...props}
     />
   );

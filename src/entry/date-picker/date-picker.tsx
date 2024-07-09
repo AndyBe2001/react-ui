@@ -25,7 +25,7 @@ export function DatePicker({
   clearable = false,
   date,
   onChange,
-  placeholder = "Pick a date",
+  placeholder,
 }: DatePickerProps) {
   const [pickerDate, setPickerDate] = useState<Date>(date);
 
@@ -44,11 +44,9 @@ export function DatePicker({
             className
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {pickerDate ? (
-            dayjs(pickerDate).format("LL")
-          ) : (
-            <span>{placeholder}</span>
-          )}
+          {pickerDate
+            ? dayjs(pickerDate).format("LL")
+            : placeholder && <span>{placeholder}</span>}
           {clearable && pickerDate && (
             <CrossCircledIcon
               className="hidden ml-auto group-hover:block hover:text-primary-500"

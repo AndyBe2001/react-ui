@@ -22,14 +22,14 @@ export interface DateRangePickerProps
   onChange?: (date: DateRange) => void;
 }
 
-export function DateRangePicker({
+export const DateRangePicker = ({
   clearable = false,
   className,
   date,
-  placeholder = "Pick a date",
+  placeholder,
   onChange,
   ...props
-}: DateRangePickerProps) {
+}: DateRangePickerProps) => {
   const [pickerDate, setPickerDate] = useState<DateRange | undefined>({
     from: date?.from,
     to: date?.to,
@@ -61,7 +61,7 @@ export function DateRangePicker({
                 dayjs(pickerDate.from).format("LL")
               )
             ) : (
-              <span>{placeholder}</span>
+              placeholder && <span>{placeholder}</span>
             )}
             {clearable && pickerDate.to && (
               <CrossCircledIcon
@@ -86,4 +86,4 @@ export function DateRangePicker({
       </Popover>
     </div>
   );
-}
+};

@@ -21,13 +21,13 @@ export interface DatetimePickerProps {
   onChange?: (date: Date) => void;
 }
 
-export function DatetimePicker({
+export const DatetimePicker = ({
   className,
   clearable = false,
   date,
   onChange,
-  placeholder = "Pick a date and time",
-}: DatetimePickerProps) {
+  placeholder,
+}: DatetimePickerProps) => {
   const [pickerDatetime, setPickerDatetime] = useState<Date>(date);
 
   useEffect(() => {
@@ -56,11 +56,9 @@ export function DatetimePicker({
             className
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {pickerDatetime ? (
-            dayjs(pickerDatetime).format("LL LT")
-          ) : (
-            <span>{placeholder}</span>
-          )}
+          {pickerDatetime
+            ? dayjs(pickerDatetime).format("LL LT")
+            : placeholder && <span>{placeholder}</span>}
           {clearable && pickerDatetime && (
             <CrossCircledIcon
               className="hidden ml-auto group-hover:block hover:text-primary-500"
@@ -149,4 +147,4 @@ export function DatetimePicker({
       </PopoverContent>
     </Popover>
   );
-}
+};
