@@ -10,3 +10,4 @@ export * from "./separator";
 export * from "./card";
 export * from "./toaster";
 export * from "./tooltip";
+export * from "./skeleton";
