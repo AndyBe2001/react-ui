@@ -51,13 +51,13 @@ export const DatetimePicker = ({
         <Button
           variant={"outline"}
           className={cn(
-            "group w-full justify-start text-left font-normal",
+            "group w-full justify-start text-left font-normal hover:bg-white",
             !pickerDatetime && "text-muted-foreground",
             className
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
           {pickerDatetime
-            ? dayjs(pickerDatetime).format("LL LT")
+            ? dayjs(pickerDatetime).format("LL LTS")
             : placeholder && <span>{placeholder}</span>}
           {clearable && pickerDatetime && (
             <CrossCircledIcon
@@ -104,22 +104,24 @@ export const DatetimePicker = ({
             </ScrollArea>
             <ScrollArea className="h-[220px] w-10">
               <li className="grid">
-                {Array.apply(null, Array(60)).map((_, index) => (
-                  <Button
-                    variant={
-                      dayjs(pickerDatetime).get("minute") === index
-                        ? "default"
-                        : "ghost"
-                    }
-                    className="size-8 font-normal"
-                    onClick={() =>
-                      setPickerDatetime(
-                        dayjs(pickerDatetime).set("minute", index).toDate()
-                      )
-                    }>
-                    {index}
-                  </Button>
-                ))}
+                {Array.apply(null, Array(60)).map(
+                  (_: unknown, index: number) => (
+                    <Button
+                      variant={
+                        dayjs(pickerDatetime).get("minute") === index
+                          ? "default"
+                          : "ghost"
+                      }
+                      className="size-8 font-normal"
+                      onClick={() =>
+                        setPickerDatetime(
+                          dayjs(pickerDatetime).set("minute", index).toDate()
+                        )
+                      }>
+                      {index}
+                    </Button>
+                  )
+                )}
               </li>
             </ScrollArea>
             <ScrollArea className="h-[220px] w-10">

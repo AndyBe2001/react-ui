@@ -47,7 +47,7 @@ export const DateRangePicker = ({
             id="date"
             variant={"outline"}
             className={cn(
-              "group w-full justify-start text-left font-normal",
+              "group w-full justify-start text-left font-normal hover:bg-white",
               !pickerDate.from && "text-muted-foreground"
             )}>
             <CalendarIcon className="mr-2 h-4 w-4" />
